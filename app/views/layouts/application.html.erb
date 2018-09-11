@@ -8,8 +8,23 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
+  <header >
+ 
+  <div class="jumbotron align-top">
+  <div class="text-right ">
+  <% if !current_user %>
+  <%= link_to "Home", root_path %> |
+    <%= link_to "Log in", new_session_path %>
+  <% end %>
+  <%= link_to "Home", root_path %> |
+  <%= link_to "Log Out", session_path, method: :delete %>
+  </div>
+  <h1 class="diplay-4">QuestionBox</h1>
+  <p class="lead">Answers to all of Life's questions in one place.</p>
+  
+</div>
+  </header>
+  <body class="container">
     <%= yield %>
   </body>
 </html>

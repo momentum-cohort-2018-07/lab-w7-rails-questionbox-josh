@@ -1,7 +1,19 @@
-<h1>Users#index</h1>
-<%= link_to "Log in", new_session_path %>
-<%= link_to "Log Out", session_path, method: :delete %>
-
+<div>
+<%= link_to "New Question", new_question_path %>
 <% @question.each do |question| %>
+  <div class="border mb-2">
+  <div class="col-6">
   <%= question.title %>
+  </div>
+  <div class="col-6">
+  <%= markdown(question.question) %>
+  </div>
+  <div class="col-6">
+  <%= question.user.username %>
+  </div>
+  <div class = "col-11">
+  <%= link_to "Show", question_path(question) %>
+  </div>
+  </div>
 <% end %>
+</div

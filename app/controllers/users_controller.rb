@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     @question = Question.all
   end
 
+  # shows profile and questions they have posted
   def show
     
   end
