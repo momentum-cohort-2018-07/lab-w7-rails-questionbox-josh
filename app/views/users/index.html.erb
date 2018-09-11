@@ -1,3 +1,7 @@
 <h1>Users#index</h1>
 <%= link_to "Log in", new_session_path %>
 <%= link_to "Log Out", session_path, method: :delete %>
+
+<% @question.each do |question| %>
+  <%= question.title %>
+<% end %>

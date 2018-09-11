@@ -1,2 +1,11 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
+<h1>Your Question</h1>
+
+<p>Title: <%= @question.title %></p>
+ 
+<p>Question: <%= @question.question %></p>
+
+<%= link_to "Home", root_path %>
+<%= link_to "Delete", question_path(@question), method: :delete %>
+
+
+
