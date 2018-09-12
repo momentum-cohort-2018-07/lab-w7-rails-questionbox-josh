@@ -2,7 +2,7 @@
 
 <p>Title: <%= @question.title %></p>
  
-<p>Question: <%= @question.question %></p>
+<p>Question: <%= markdown(@question.question) %></p>
 
 
 <% if current_user.id == @question.user_id %>
@@ -13,7 +13,7 @@
 <% @question.answers.each do |answer| %>
   <div class="border">
   <div>
-  <%= answer.solution %>
+  <%= markdown(answer.solution) %>
   </div>
   <div>
   <%= answer.user.username %>
