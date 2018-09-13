@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
-    @question = Question.all
+    @question = Question.page(params[:page]).per(1)
   end
 
-  # shows profile and questions they have posted
+  # shows profile
   def show
     
   end

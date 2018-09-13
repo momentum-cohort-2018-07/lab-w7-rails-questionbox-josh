@@ -5,9 +5,10 @@
 <p>Question: <%= markdown(@question.question) %></p>
 
 
-<% if current_user.id == @question.user_id %>
+<% if current_user && current_user.id == @question.user_id %>
 <%= link_to "Delete", question_path(@question), method: :delete %>
 <% end %>
+
 
 <h3>Potential Answers!</h3>
 <% @question.answers.each do |answer| %>
@@ -21,7 +22,12 @@
   </div>
 <% end %>
 <div>
+<% if current_user %>
 <%= link_to "New Answer", new_question_answer_path(@question) %>
+<% end %>
+</div>
+<div>
+<%= link_to "Home", root_path %>
 </div>
 
 
