@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  skip_before_action :verify_authentication
   before_action :set_question, only: [:show, :destroy]
   def index
     @questions = Question.all

@@ -1,3 +1,29 @@
 <h1>Edit Account</h1>
-
-<%= render 'form', user: @user %>
+<%= link_to "Back", user_path(current_user.id) %>
+<div>
+<%= form_with model: @user, local: true do |form| %>
+  <div class="form-group">
+  <%= form.label :first_name %>
+  <%= form.text_field :first_name, class:"form-control" %>
+  </div>
+  <div class="form-group">
+  <%= form.label :last_name %>
+  <%= form.text_field :last_name, class:"form-control" %>
+  </div>
+  <div class="form-group">
+  <%= form.label :username %>
+  <%= form.text_field :username, class:"form-control" %>
+  </div>
+  <div class="form-group">
+  <%= form.label :email %>
+  <%= form.text_field :email, class:"form-control" %>
+  </div>
+  <div class="form-group">
+  <%= form.label :profile_pic %>
+  <%= form.file_field :profile_pic, class:"form-control-file" %>
+  </div>
+  <div>
+  <%= form.submit "Update", class:"btn btn-primary" %>
+  </div>
+<% end %>
+</div>

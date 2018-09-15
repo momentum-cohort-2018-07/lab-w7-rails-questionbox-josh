@@ -19,6 +19,12 @@
   <div>
   <%= answer.user.username %>
   </div>
+  <%= form_with model: [@question, answer], method: :put, local: true do |f| %>
+    <%= f.label "Correct Answer" %>
+    <%= f.check_box :correct_answer, value: true %>
+    <%= f.submit %>
+  <% end %>
+  <%= answer.correct_answer %>
   </div>
 <% end %>
 <div>
