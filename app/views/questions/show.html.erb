@@ -2,7 +2,7 @@
 
 <p>Title: <%= @question.title %></p>
  
-<p>Question: <%= markdown(@question.question) %></p>
+<p>Question: <%= markdown(@question.body) %></p>
 
 
 <% if current_user && current_user.id == @question.user_id %>

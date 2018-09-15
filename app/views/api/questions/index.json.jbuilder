@@ -1,3 +1,3 @@
 json.array! @questions do |question|
-  json.extract! question, :id, :title, :question, :created_at
+  json.extract! question, :id, :title, :body, :created_at
 end

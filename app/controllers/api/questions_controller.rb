@@ -6,18 +6,30 @@ class API::QuestionsController < ApplicationController
   end
 
   def create
+      @question = Question.new(title: question_params[:title], body: question_params[:body], user_id: api_token_user.id)
+      if @question.save
+        render :show, status: :created, location: api_question_url(@question)
+      else
+       render json: { "error": "Unable to create question" }
+      end
   end
 
   def show
   end
 
   def destroy
+    if api_token_user.id == @question.user_id
+      @question.destroy
+      render json: {"notice": "Question has been deleted"}
+    else
+      render json: {"error": "Can't delete questions that are not yours"}
+    end
   end
 
   private
 
   def question_params
-    params.require(:question).permit(:question, :title, :user_id)
+    params.require(:question).permit(:title, :body)
   end
 
   def set_question

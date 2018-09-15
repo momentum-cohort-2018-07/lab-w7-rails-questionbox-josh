@@ -10,7 +10,7 @@
   <h3>Quesitons</h3>
   <% @user.questions.each do |question| %>
     <p><%= question.title %> </p>
-    <p><%= markdown(question.question) %> </p> 
+    <p><%= markdown(question.body) %> </p> 
   <% end %>
  
 <%= link_to "Home", root_path %></p>
