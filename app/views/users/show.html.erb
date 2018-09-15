@@ -7,10 +7,10 @@
  
   <p>username: <%= @user.username %></p>
   <p>email: <%= @user.email %></p>
-
+  <h3>Quesitons</h3>
   <% @user.questions.each do |question| %>
     <p><%= question.title %> </p>
-    <p><%= question.question %> </p> 
+    <p><%= markdown(question.question) %> </p> 
   <% end %>
  
 <%= link_to "Home", root_path %></p>

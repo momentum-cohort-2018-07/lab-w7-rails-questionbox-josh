@@ -1,6 +1,6 @@
 class API::UsersController < ApplicationController
   skip_before_action :verify_authentication, only: [:create]
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :destroy, :update]
   def index
     @users = User.all
   end
@@ -25,12 +25,19 @@ class API::UsersController < ApplicationController
   def destroy
     if api_token_user.id == @user.id
       @user.destroy
+      render json: {"notice": "User has been deleted"}
     else
       render json: {"error": "You don't have permissions to delete this account"}
     end
   end
 
   def update
+    if api_token_user.id == @user.id
+      @user.update(user_params)
+      render :profile, status: :updated, location: api_profile_path
+    else
+      render json: {"error": "You don't have permissions to update this account"}
+    end
   end
 
   private
