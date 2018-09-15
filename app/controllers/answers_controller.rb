@@ -15,6 +15,7 @@ class AnswersController < ApplicationController
    @question = Question.find(params[:question_id])
    @answer = @question.answers.create(answer_params)
    if @answer.save
+    AnswerMailer.answer_noti(@question.user).deliver_now
     redirect_to @question
    else
     flash[:notice] = "Failed to submit answer"

@@ -14,7 +14,7 @@
   <%= link_to "Create New Account", new_user_path, class:"text-light" %> |
     <%= link_to "Log in", new_session_path, class:"text-light" %>
   <% else %>
-  <%= link_to "Account", user_path(current_user.id), class:"text-light" %> |
+  <%= link_to "Account", profile_path, class:"text-light" %> |
   <%= link_to "Log Out", session_path, method: :delete, class:"text-light" %>
   <% end %>
   </div>

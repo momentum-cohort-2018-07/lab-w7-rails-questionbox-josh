@@ -1,5 +1,7 @@
 <h1>Profile Page</h1>
-
+<% if flash[:error_message]%>
+<p class="flash-error"><%= flash[:error_message] %></p>
+<% end %>
 <% if @user.profile_pic.attached? %>
 <div><%= image_tag @user.profile_pic, class:"img-thumbnail", style: "max-width: 200px" %></div>
 <% end %>
@@ -13,4 +15,5 @@
     <p><%= question.question %> </p> 
   <% end %>
  
-<%= link_to "Home", root_path %></p>
+  <p><%= link_to "Edit", edit_user_path(@user) %> | 
+  <%= link_to "Delete", user_path(@user), method: :delete %> | <%= link_to "Home", root_path %></p>

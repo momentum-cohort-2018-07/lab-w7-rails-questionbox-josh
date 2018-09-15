@@ -17,6 +17,5 @@ json.data do
     json.api_token @user.api_token
     json.questions @user.questions.count
     json.answers @user.answers.count
-    json.profile_pic @user.profile_pic_url
   end
 end

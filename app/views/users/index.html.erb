@@ -9,7 +9,7 @@
   <%= markdown(question.question) %>
   </div>
   <div class="col-6">
-  <%= question.user.username %>
+  <%= link_to "#{question.user.username}", user_path(question.user.id) %>
   </div>
   <div class = "col-11">
   <%= link_to "Show", question_path(question) %>

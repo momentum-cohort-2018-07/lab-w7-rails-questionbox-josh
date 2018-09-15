@@ -5,12 +5,12 @@ class UsersController < ApplicationController
     @question = Question.order('created_at DESC').page(params[:page]).per(1)
   end
 
-  # shows profile
+  def profile
+    @user = current_user
+   
+  end
   def show
-    if current_user.id != @user.id
-      redirect_to current_user
-      flash[:error_message] = "You can only view your profile information"
-    end
+   
   end
 
   def new

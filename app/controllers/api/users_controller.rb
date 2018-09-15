@@ -1,7 +1,12 @@
 class API::UsersController < ApplicationController
   skip_before_action :verify_authentication, only: [:create]
-  before_action only: [:show]
+  before_action :set_user, only: [:show]
+  def index
+    @users = User.all
+  end
+
   def show
+  
   end
 
   def profile
