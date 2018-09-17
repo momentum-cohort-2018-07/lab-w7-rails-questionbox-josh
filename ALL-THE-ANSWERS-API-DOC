@@ -1,0 +1,194 @@
+# Using the All-The-Answers API
+
+Welcome to the All-The-Answers API, this doc will guide you through the use of our API.
+
+All API access is over HTTP, and accessed from https://all-the-answers.herokuapp.com/api/. All data is sent and received as JSON.
+
+## Authentication
+
+Authencation is done through HTTP Token Authentican. Each User will be provided a token on registred. Registration route is an unauthenticated route. To access tokens you will need to login or create a user.
+
+### To Create a User:
+
+go to `/users` to create a user as a POST request  
+
+The request body should be:
+```json
+{ "user": 
+      {
+        "first_name": "first_name",
+        "last_name": "last_name",
+        "username": "username",
+        "email": "email",
+        "password": "password"
+      }
+}
+```
+The response will be:
+```json
+{
+    "id": 00,
+    "username": "bk1311",
+    "email": "josh@gmail.com",
+    "first_name": "Josh",
+    "last_name": "Carroccia",
+    "password_digest": "$2a$10$AKkKALZ3wUmgfFT1RcuKTOM97eiin/bSWMqVHDGVbuop..GkJYY4e",
+    "created_at": "2018-09-17T19:15:40.646Z",
+    "updated_at": "2018-09-17T19:15:40.646Z",
+    "api_token": "gRgmeaeDgMeo99cSfoBEW3gi"
+}
+```
+
+### If User exist 
+
+  Go to `/session` to login with username and password  
+  On successful login the response will be the Users's api_token  
+
+## Users
+
+  Users can ask questions, answer questions and can mark answers to their questions as valid  
+
+### Getting Profile Info 
+
+  Must be authenticated by using your token
+  To go to your User Profile, `GET /profile`   
+  Response will be:  
+  ```json
+  {
+    "links": {
+        "self": "/api/profile",
+        "update": {
+            "method": "PUT",
+            "href": "https://all-the-answers.herokuapp.com/api/users/2"
+        },
+        "delete": {
+            "method": "DELETE",
+            "href": "https://all-the-answers.herokuapp.com/api/users/2"
+        }
+    },
+    "data": {
+        "id": 2,
+        "attributes": {
+            "first_name": "Josh",
+            "last_name": "Carroccia",
+            "username": "bk1311",
+            "email": "josh@gmail.com",
+            "api_token": "gRgmeaeDgMeo99cSfoBEW3gi",
+            "questions": 0,
+            "answers": 0
+        }
+    }
+  }
+  ```
+  The JSON resonse shows you the endpaths to update or delete. Only owners of the profile can use those methods
+
+  To go to all users, `GET /users`  
+   The repsonse will be an abridged JSON response with just username and id  
+
+   ```json
+   [
+      {
+          "id": 1,
+          "username": "north_king",
+          "created_at": "2018-09-17T19:02:07.693Z"
+      },
+      {
+          "id": 2,
+          "username": "bk1311",
+          "created_at": "2018-09-17T19:15:40.646Z"
+      }
+   ]
+   ```
+
+### Asking a Question
+
+To ask a question, go to `POST /questions`  
+  
+The request body should be:  
+```json
+  {	
+		"title": "Question Title",
+    "body": "Question Body(can take Markdown)"
+	}
+```
+
+The repsonse will be:  
+```json
+  {
+    "links": {
+        "self": "https://all-the-answers.herokuapp.com/api/questions/2",
+        "list": "https://all-the-answers.herokuapp.com/api/questions"
+    },
+    "data": {
+        "id": 2,
+        "attributes": {
+            "title": "Question Title",
+            "question": "Question Body",
+            "answers_count": 0,
+            "answers": []
+        }
+    }
+}
+```
+
+To view a question with all of its answers go to:  
+
+`GET /questions/question-id`  
+
+The response will be the same as above.  
+
+### Answering a question
+
+ To Answer a question go to:  
+  `POST /questions/question-id/answers`  
+  
+  The request will be:  
+  ```json
+  {	
+		"solution": "Proposed Answer"
+	}
+  ```
+
+  The response will be:  
+  ```json
+  {
+    "links": {
+        "self": "https://all-the-answers.herokuapp.com/api/questions/1",
+        "list": "https://all-the-answers.herokuapp.com/api/questions"
+    },
+    "data": {
+        "id": 1,
+        "attributes": {
+            "title": "Winter is Coming?",
+            "question": "I am just wondering if any one else is cold? Its pretty lonely up North, all I have is Ghost and the White Walkers for company. ",
+            "answers_count": 1,
+            "answers": [
+                {
+                    "id": 1,
+                    "solution": "Jon, Come down south to King's Landing! You would love it! Your Dad and sisters are having a great time!",
+                    "correct_answer": false,
+                    "question_id": 1,
+                    "user_id": 2,
+                    "created_at": "2018-09-17T19:36:03.898Z",
+                    "updated_at": "2018-09-17T19:36:03.898Z"
+                }
+            ]
+        }
+    }
+  }
+  ```
+
+  ### Mark an answer valid 
+
+  To mark an answer as valid go to:  
+  `PUT /questions/question-id/answers/answers-id`  
+
+  The request should be:  
+  ```json
+    {	
+		  "correct_answer": true
+	  }
+  ```
+
+  The response will be the same as the response for asking a question, but the correct_answer field will now be true.  
+  Only the Question asker can mark an answer valid.
