@@ -32,6 +32,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     @question = @answer.question
     if current_user.id != @question.user_id
+      redirect_to @question
       flash[:error_message] ="You can't mark answer"
     else
       if @answer.update(answer_params)
@@ -42,7 +43,6 @@ class AnswersController < ApplicationController
       end
     end
   end
-
 
   def destroy
   end

@@ -12,7 +12,7 @@
 
   <% @user.questions.each do |question| %>
     <p><%= question.title %> </p>
-    <p><%= markdown(question.body) %> </p> 
+    <p><%= markdown(question.body) %></p> 
   <% end %>
  
   <p><%= link_to "Edit", edit_user_path(@user) %> | 

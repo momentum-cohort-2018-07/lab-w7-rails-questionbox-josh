@@ -11,7 +11,7 @@
   <%= form.text_area :body, class:"form-text-area form-control" %>
   </div>
   <div>
-  <%= form.submit %>
+  <%= form.submit "Submit New Question", class:"btn btn-primary mb-3" %> <%= link_to "Cancel", root_path, class:"btn btn-primary mb-3" %>
   </div>
 <% end %>
 
