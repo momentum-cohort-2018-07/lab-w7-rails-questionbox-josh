@@ -1,0 +1,20 @@
+<div class="container text-center col-4"
+<div class="mb-4">
+<h2 class="h3 mb-3 font-weight-normal">Log In</h2>
+<% if flash[:error_message]%>
+    <p class="flash-error"><%= flash[:error_message] %></p>
+<% end %>
+<%= form_with(url: session_path) do %>
+    <div class="form-label-group">
+      <%=text_field_tag :email, "", class:"form-control mb-2", placeholder:"Email address" %>
+    </div>
+   <div class="form-label-group">
+    
+    <%=password_field_tag :password, "", class:"form-control mb-2", placeholder:"Password"  %>
+   </div>
+    <%=submit_tag "Log in", class: "btn btn-lg btn-primary btn-block" %>
+<% end %>
+
+<%= link_to "Create an Account", new_user_path %> | <%= link_to "Home", root_path %>
+</div>
+</div>

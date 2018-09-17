@@ -1,0 +1,15 @@
+<header>
+  <div class="text-right text-light bg-secondary p-2">
+  <% if !current_user %>
+    <%= link_to "Create New Account", new_user_path, class:"text-light" %> |
+    <%= link_to "Log in", new_session_path, class:"text-light" %>
+  <% else %>
+    <%= link_to "Account", profile_path, class:"text-light" %> |
+    <%= link_to "Log Out", session_path, method: :delete, class:"text-light" %>
+  <% end %>
+  </div>
+  <div class="align-top bg-secondary p-2">
+    <h1 class="diplay-4">QuestionBox</h1>
+    <p class="lead">Answers to all of Life's questions in one place.</p>
+  </div>
+</header>

@@ -1,0 +1,19 @@
+<h1>Profile Page</h1>
+<% if flash[:error_message]%>
+<p class="flash-error"><%= flash[:error_message] %></p>
+<% end %>
+<% if @user.profile_pic.attached? %>
+<div><%= image_tag @user.profile_pic, class:"img-thumbnail", style: "max-width: 200px" %></div>
+<% end %>
+  <p>Name: <%= @user.first_name %> <%= @user.last_name %></p>
+ 
+  <p>username: <%= @user.username %></p>
+  <p>email: <%= @user.email %></p>
+
+  <% @user.questions.each do |question| %>
+    <p><%= question.title %> </p>
+    <p><%= markdown(question.body) %></p> 
+  <% end %>
+ 
+  <p><%= link_to "Edit", edit_user_path(@user) %> | 
+  <%= link_to "Delete", user_path(@user), method: :delete %> | <%= link_to "Home", root_path %></p>
