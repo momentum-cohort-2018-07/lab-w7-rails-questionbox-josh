@@ -7,7 +7,7 @@ class API::AnswersController < ApplicationController
    if @answer.save
     render "api/questions/show", status: :created, location: api_question_url(@question)
    else
-    render json: {"error": "failed to create answer"} , status: :unprocessable_entity
+    render json: {"error": "failed to create answer"}, status: :unprocessable_entity
    end
   end
 
@@ -16,7 +16,7 @@ class API::AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     @question = @answer.question
     if api_token_user.id != @question.user_id
-      render json: {"error": "You can't mark answer"}, , status: :forbidden
+      render json: {"error": "You can't mark answer"}, status: :unauthorized
     else
       if @answer.update(answer_params)
         render "api/questions/show", status: :updated, location: api_question_url(@question_id)
@@ -29,7 +29,7 @@ class API::AnswersController < ApplicationController
   def destroy
     if api_token_user.id == @answer.user_id
       @answer.destroy
-      render json: {"notice": "Question has been deleted"}, , status: :accepted
+      render json: {"notice": "Question has been deleted"}, status: :accepted
     else
       render json: {"error": "Can't delete questions that are not yours"}, status: :unprocessable_entity
     end
