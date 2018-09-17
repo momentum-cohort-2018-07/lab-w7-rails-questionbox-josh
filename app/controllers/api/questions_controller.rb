@@ -10,7 +10,7 @@ class API::QuestionsController < ApplicationController
       if @question.save
         render :show, status: :created, location: api_question_url(@question)
       else
-       render json: { "error": "Unable to create question" }
+       render json: { "error": "Unable to create question" }, status: :unprocessable_entity
       end
   end
 
@@ -20,9 +20,9 @@ class API::QuestionsController < ApplicationController
   def destroy
     if api_token_user.id == @question.user_id
       @question.destroy
-      render json: {"notice": "Question has been deleted"}
+      render json: {"notice": "Question has been deleted"}, status: :accepted
     else
-      render json: {"error": "Can't delete questions that are not yours"}
+      render json: {"error": "Can't delete questions that are not yours"}, status: :unprocessable_entity
     end
   end
 

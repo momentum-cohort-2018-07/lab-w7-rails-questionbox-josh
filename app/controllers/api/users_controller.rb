@@ -18,16 +18,16 @@ class API::UsersController < ApplicationController
     if @user.save
     render json: @user
     else
-      render json: {"error": "Invalid"}
+      render json: {"error": "Invalid"}, status: :unprocessable_entity
     end
   end
 
   def destroy
     if api_token_user.id == @user.id
       @user.destroy
-      render json: {"notice": "User has been deleted"}
+      render json: {"notice": "User has been deleted"}, status: :accepted
     else
-      render json: {"error": "You don't have permissions to delete this account"}
+      render json: {"error": "You don't have permissions to delete this account"}, status: :unprocessable_entity
     end
   end
 
@@ -36,7 +36,7 @@ class API::UsersController < ApplicationController
       @user.update(user_params)
       render :profile, status: :updated, location: api_profile_path
     else
-      render json: {"error": "You don't have permissions to update this account"}
+      render json: {"error": "You don't have permissions to update this account"}, status: :unauthorized
     end
   end
 
