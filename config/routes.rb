@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- 
+  
   resource :session, only: [:new, :create, :destroy]
   get 'profile', to: 'users#profile'
   resources :users
