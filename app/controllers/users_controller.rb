@@ -2,7 +2,12 @@ class UsersController < ApplicationController
   skip_before_action :verify_authentication
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
-    @question = Question.order('created_at DESC').page(params[:page]).per(3)
+    @question = Question.order('created_at DESC').page(params[:page]).per(10)
+    # @question = Question.left_outer_joins(:answer).left_outer_joins(:user)
+    #             .select('questions.*')
+                        
+    
+    #                     .order('created_at DESC').page(params[:page]).per(10)
   end
 
   def profile

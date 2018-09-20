@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 4.1.3'
 gem 'redcarpet', '~> 3.0.0'
 gem 'kaminari'
+gem "pg_search"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
