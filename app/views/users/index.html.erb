@@ -1,4 +1,8 @@
 <%= render 'layouts/header' %>
+<%= form_with(url: users_path, method: :get, local: true, :html => {:class => "form-inline my-2 my-sm-0 d-none d-sm-block"}) do |form| %>
+  <%= form.text_field :search, :class => 'form-control mr-sm-2', :placeholder => 'Search' %>
+  <%= submit_tag 'Search', :class => "btn btn-primary my-2 my-sm-0" %>
+<% end %>
 <div class="my-3 p-3 bg-white rounded shadow-sm">
   <h6 class="border-bottom border-gray pb-2 mb-0">Questions | <%= link_to "New Question", new_question_path %></h6>
     <% @question.each do |question| %>
